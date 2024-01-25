@@ -1,5 +1,11 @@
 package com.example.demo.service;
 
-public class IEstudianteService {
+import com.example.demo.repository.modelo.Estudiante;
 
+public interface IEstudianteService {
+	public void guardar(Estudiante estudiante);
+	public void actualizar(Estudiante estudiante);
+	public void actualizarParcial(String apellido, String nombre, Integer id);
+	public Estudiante buscar(Integer id);
+	public void borrarr(Integer id);
 }
