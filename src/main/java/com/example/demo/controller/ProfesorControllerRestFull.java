@@ -23,33 +23,34 @@ public class ProfesorControllerRestFull {
 	  @Autowired
 	  private IProfesorService profesorService;
 	  
-	  @GetMapping(path = "/buscar/{id}")
+	  @GetMapping(path = "/{id}")
 	  public Profesor buscar(@PathVariable(name = "id") Integer id) {
 	      return this.profesorService.seleccionar(id);
 	      
 	  } 
 	  
-	  @PostMapping(path ="/guardar")
+	  @PostMapping
 	  public void guardar(@RequestBody Profesor profesor){
 	        this.profesorService.insertar(profesor);
 	  }
 	  
-	  @PutMapping(path = "/actualizar")
-	  public void actualizar(@RequestBody Profesor profesor) {
+	  @PutMapping(path = "/{id}")
+	  public void actualizar(@RequestBody Profesor profesor, @PathVariable(name = "id") Integer id) {
+		  profesor.setId(id);
 	        this.profesorService.actualizar(profesor);
 	  }
 	  
-	  @PatchMapping(path = "/actualizarParcial")
-	  public void actualizarParcial(@RequestBody Profesor profesor) {
+	  @PatchMapping(path = "/{id}")
+	  public void actualizarParcial(@RequestBody Profesor profesor, @PathVariable(name = "id") Integer id) {
 	        this.profesorService.actualizarParcial(profesor.getApellido(), profesor.getNombre(), profesor.getId());
 	  }
 	  
-	  @DeleteMapping(path = "/borrar/{id}")
+	  @DeleteMapping(path = "/{id}")
 	  public void borrar(@PathVariable(name = "id") Integer id) {
 	        this.profesorService.eliminar(id);
 	  }
 	  
-	  @GetMapping(path = "/consultarTodos")
+	  @GetMapping
 	  public List<Profesor> consultarTodos(@RequestParam(name = "genero") String genero) {
 	        return this.profesorService.consultarTodos(genero);
 	  }
